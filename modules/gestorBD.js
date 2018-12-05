@@ -5,13 +5,13 @@ module.exports = {
         this.mongo = mongo;
         this.app = app;
     },
-    insertarCancion : function(cancion, funcionCallback) {
+    insertarUsuario : function(usuario, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
                 funcionCallback(null);
             } else {
-                var collection = db.collection('canciones');
-                collection.insert(cancion, function(err, result) {
+                var collection = db.collection('usuarios');
+                collection.insert(usuario, function(err, result) {
                     if (err) {
                         funcionCallback(null);
                     } else {
@@ -21,5 +21,93 @@ module.exports = {
                 });
             }
         });
-    }
-};
+    },
+    eliminarCancion : function(criterio, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('canciones');
+                collection.remove(criterio, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+    modificarCancion : function(criterio, cancion, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('canciones');
+                collection.update(criterio, {$set: cancion}, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+//ver si algun usuario tiene esos datos (login)
+    obtenerUsuarios : function(criterio,funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+
+                var collection = db.collection('usuarios');
+                collection.find(criterio).toArray(function(err, usuarios) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(usuarios);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+    obtenerCanciones : function(criterio,funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+
+                var collection = db.collection('canciones');
+                collection.find(criterio).toArray(function(err, canciones) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(canciones);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+    insertarCancion : function(cancion, funcionCallback) {
+            this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+                if (err) {
+                    funcionCallback(null);
+                } else {
+                    var collection = db.collection('canciones');
+                    collection.insert(cancion, function(err, result) {
+                        if (err) {
+                            funcionCallback(null);
+                        } else {
+                            funcionCallback(result.ops[0]._id);
+                        }
+                        db.close();
+                    });
+                }
+            });
+        }
+    };
