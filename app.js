@@ -2,6 +2,8 @@
 var express = require('express');
 var app = express();
 
+//var fs = require('fs');
+//var https = require('https');
 var expressSession = require('express-session');
 app.use(expressSession({//interesante cuanto tiempo tarda en expirar la sesión
     secret: 'abcdefg',
@@ -39,6 +41,8 @@ app.use(express.static('public'));
 //Aplicar routerUsuarioSession
 app.use("/canciones/agregar",routerUsuarioSession);
 app.use("/publicaciones",routerUsuarioSession);
+app.use("/cancion/comprar",routerUsuarioSession);
+app.use("/compras",routerUsuarioSession);
 //routerUsuarioAutor
 var routerUsuarioAutor = express.Router();
 routerUsuarioAutor.use(function(req, res, next) {
@@ -76,7 +80,18 @@ routerAudios.use(function(req, res, next) {
             if( canciones[0].autor == req.session.usuario ){
                 next();
             } else {
-                res.redirect("/tienda");
+                var criterio = {
+                    usuario : req.session.usuario,
+                    cancionId : mongo.ObjectID(idCancion)
+                };
+
+                gestorBD.obtenerCompras(criterio ,function(compras){
+                    if (compras != null && compras.length > 0  ){
+                        next();
+                    } else {
+                        res.redirect("/tienda");
+                    }
+                });
             }
         })
 
@@ -102,6 +117,13 @@ app.get('/', function (req, res) {
     res.redirect('/tienda');
 })
 
+app.use( function (err, req, res, next ) {
+    console.log("Error producido: " + err); //we log the error in our db
+    if (! res.headersSent) {
+        res.status(400);
+        res.send("Recurso no disponible");
+    }
+});
 
 // lanzar el servidor
 app.listen(app.get('port'), function() {

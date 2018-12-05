@@ -39,6 +39,65 @@ module.exports = {
             }
         });
     },
+    insertarCompra: function(compra, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('compras');
+                collection.insert(compra, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result.ops[0]._id);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+    obtenerCancionesPg : function(criterio,pg,funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+
+                var collection = db.collection('canciones');
+                collection.count(function(err, count){
+
+                    collection.find(criterio).skip( (pg-1)*4 ).limit( 4 )
+                        .toArray(function(err, canciones) {
+
+                            if (err) {
+                                funcionCallback(null);
+                            } else {
+                                funcionCallback(canciones, count);
+                            }
+                            db.close();
+                        });
+
+                });
+            }
+        });
+    },
+    obtenerCompras : function(criterio,funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+
+                var collection = db.collection('compras');
+                collection.find(criterio).toArray(function(err, compras) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(compras);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
     modificarCancion : function(criterio, cancion, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
