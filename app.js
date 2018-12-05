@@ -103,7 +103,7 @@ app.use("/audios/",routerAudios);
 
 
 // Variables
-app.set('port', 8081);
+app.set('port', process.env.PORT || 8081);
 app.set('db','mongodb://admin:justfoodadmin1@ds127094.mlab.com:27094/justfood');
 app.set('clave','9bBmJOP3yGfo1QB1LtSO');
 app.set('crypto',crypto);
