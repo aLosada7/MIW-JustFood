@@ -49,9 +49,7 @@ module.exports = function(app,swig,gestorBD) {
             if (id == null) {
                 res.send("Error al insertar ");
             } else {
-                res.redirect("/publicaciones+\n" +
-                    "                    \"?mensaje=Menú añadido correctamente\"+\n" +
-                    "                    \"&tipoMensaje=alert-success \"");
+                res.redirect("/publicaciones");
             }
         });
 
