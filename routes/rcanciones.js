@@ -49,17 +49,19 @@ module.exports = function(app,swig,gestorBD) {
             if (id == null) {
                 res.send("Error al insertar ");
             } else {
-                res.redirect("/publicaciones");
+                res.redirect("/publicaciones+\n" +
+                    "                    \"?mensaje=Menú añadido correctamente\"+\n" +
+                    "                    \"&tipoMensaje=alert-success \"");
             }
         });
 
     });
 
     app.get("/tienda", function(req, res) {
-        var criterio = {};
+        var criterio = {"tipoUsuario": "Restaurante"};
 
         if( req.query.busqueda != null ){
-            criterio = { "nombre" : req.query.busqueda };
+            criterio = { "name" : req.query.busqueda};
         }
 
         var pg = parseInt(req.query.pg); // Es String !!!
@@ -131,30 +133,32 @@ module.exports = function(app,swig,gestorBD) {
     });
 
 
-    app.get('/cancion/modificar/:id', function (req, res) {
+    app.get('/menu/modificar/:id', function (req, res) {
         var criterio = { "_id" : gestorBD.mongo.ObjectID(req.params.id)  };
 
-        gestorBD.obtenerCanciones(criterio,function(canciones){
-            if ( canciones == null ){
+        gestorBD.obtenerMenu(criterio,function(menus){
+            if ( menus == null ){
                 res.send(respuesta);
             } else {
-                var respuesta = swig.renderFile('views/bcancionModificar.html',
+                var respuesta = swig.renderFile('views/bmenuModificar.html',
                     {
-                        cancion : canciones[0]
+                        menu : menus[0]
                     });
                 res.send(respuesta);
             }
         });
     })
 
-    app.get('/cancion/eliminar/:id', function (req, res) {
+    app.get('/menu/eliminar/:id', function (req, res) {
         var criterio = { "_id" : gestorBD.mongo.ObjectID(req.params.id)  };
 
-        gestorBD.eliminarCancion(criterio,function(canciones){
-            if ( canciones == null ){
+        gestorBD.eliminarMenu(criterio,function(menus){
+            if ( menus == null ){
                 res.send(respuesta);
             } else {
-                res.redirect("/publicaciones");
+                res.redirect("/publicaciones"+
+                    "?mensaje=Menú eliminado correctamente"+
+                    "&tipoMensaje=alert-success ");
             }
         });
     })
@@ -200,28 +204,32 @@ module.exports = function(app,swig,gestorBD) {
         });
     })
 
-    app.post('/cancion/modificar/:id', function (req, res) {
+    app.post('/menu/modificar/:id', function (req, res) {
+        console.log("aqui");
         var id = req.params.id;
         var criterio = { "_id" : gestorBD.mongo.ObjectID(id)  };
 
-        var cancion = {
+        var menu = {
             nombre : req.body.nombre,
-            genero : req.body.genero,
-            precio : req.body.precio
+            primerPlato : req.body.primerPlato,
+            segundoPlato : req.body.segundoPlato,
+            tercerPlato: req.body.tercerPlato,
+            postre: req.body.postre,
+            precio: req.body.precio,
+            restaurante: req.session.usuario
         }
 
-        gestorBD.modificarCancion(criterio, cancion, function(result) {
+        gestorBD.modificarMenu(criterio, menu, function(result) {
             if (result == null) {
                 res.send("Error al modificar ");
             } else {
-                paso1ModificarPortada(req.files, id, function (result) {
                     if( result == null){
                         res.send("Error en la modificación");
                     } else {
-                        res.send("Modificado");
+                        res.redirect("/publicaciones"+
+                            "?mensaje=Menú modificado correctamente"+
+                            "&tipoMensaje=alert-success ");
                     }
-                });
-
             }
         });
 
