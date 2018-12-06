@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block titulo %} Registrar usuario {% endblock %}
+
+{% block contenido_principal %}
+<h2>Registrar usuario</h2>
+<form class="form-horizontal" method="post" action="/usuario/Restaurante" encType="multipart/form-data">
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Email:</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" name="email"
+                   placeholder="email@email.com" required="true" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="password">Password:</label>
+        <div class="col-sm-10">
+            <input type="password"  class="form-control" name="password"
+                   placeholder="contraseña" required="true" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="name">Nombre:</label>
+        <div class="col-sm-10">
+            <input type="text"  class="form-control" name="name"
+                   placeholder="" required="true" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="speciality">Especialidad:</label>
+        <div class="col-sm-10">
+            <select class="form-control" name="speciality" required="true">
+                <option value="hamburguesas">Hamburguesas</option>
+                <option value="bocadillos">Bocadillos</option>
+                <option value="cocinaautor">Cocina de autor</option>
+                <option value="pizza">Pizzas</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="phoneNumber">Teléfono:</label>
+        <div class="col-sm-10">
+            <input type="text"  class="form-control" name="phoneNumber"
+                   placeholder="" required="true" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="address">Dirección:</label>
+        <div class="col-sm-10">
+            <input type="text"  class="form-control" name="address"
+                   placeholder="" required="true" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="city">Provincia:</label>
+        <div class="col-sm-10">
+            <input type="text"  class="form-control" name="city"
+                   placeholder="" required="true" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="image">Imagen:</label>
+        <div class="col-sm-10">
+            <input type="file" class="custom-file-input" name="image" accept=".png"  required/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

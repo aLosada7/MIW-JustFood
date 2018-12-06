@@ -1,0 +1,29 @@
+{% extends "base.html" %} 
+
+{% block titulo %} {{ cancion.nombre }} {% endblock %}
+
+{% block contenido_principal %}
+	 <div class="row">
+		<div class="media col-xs-10">
+		  <div class="media-left media-middle">
+			<img class="media-object" src="/imgRestaurantes/{{ restaurante._id.toString() }}.png" >
+		  </div>
+		  <div class="media-body">
+			  <h2>{{ restaurante.name }}</h2>
+			  <p>{{ restaurante.speciality }}</p>
+			  <p>{{ restaurante.address }}</p>
+			  <a class="btn btn-primary pull-right"
+				 href="/cancion/comprar/{{ cancion._id.toString() }}">{{ cancion.precio }} €</a>
+			 <!-- Cambiar el precio por "reproducir" si ya está comprada -->
+		  </div>
+		</div>
+	  </div>
+
+	{% for menu in menus %}
+		<h1>{{ menu.nombre }}</h1>
+		<p>Primer plato: {{ menu.primerPlato }}</p>
+		<p>Segundo plato: {{ menu.segundoPlato }}</p>
+		<p>Postre: {{ menu.postre }}</p>
+		<h2>{{ menu.precio }}</h2>
+	{% endfor %}
+{% endblock %}

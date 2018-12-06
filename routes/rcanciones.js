@@ -22,59 +22,36 @@ module.exports = function(app,swig,gestorBD) {
 
     });
 
-    app.get('/canciones/agregar', function (req, res) {
+    app.get('/menus/agregar', function (req, res) {
         var respuesta = swig.renderFile('views/bagregar.html', {
 
         });
         res.send(respuesta);
     })
 
-    app.post("/cancion", function(req, res) {
+    app.post("/menu", function(req, res) {
 
-        var cancion = {
+        //console.log("aqui");
+
+        var menu = {
             nombre : req.body.nombre,
-            genero : req.body.genero,
-            precio : req.body.precio,
-            autor: req.session.usuario
+            primerPlato : req.body.primerPlato,
+            segundoPlato : req.body.segundoPlato,
+            tercerPlato: req.body.tercerPlato,
+            postre: req.body.postre,
+            precio: req.body.precio,
+            restaurante: req.session.usuario
         }
 
+
         // Conectarse
-        gestorBD.insertarCancion(cancion, function(id) {
+        gestorBD.insertarMenu(menu, function(id) {
             if (id == null) {
                 res.send("Error al insertar ");
             } else {
-                //res.send("Agregada id:  " + id);
-
-                if (req.files.portada != null) {
-                    var imagen = req.files.portada;
-                    imagen.mv('public/portadas/'+id+'.png', function(err) {
-                        if (err) {
-                            res.send("Error al subir la portada");
-                        } else {
-                            //res.send("Agregada id:  "+ result.ops[0]._id);
-
-                            if (req.files.audio != null) {
-                                var audio = req.files.audio;
-                                audio.mv('public/audios/'+id+'.mp3', function(err) {
-                                    if (err) {
-                                        res.send("Error al subir el audio");
-                                    } else {
-                                        res.send("Agregada id:  "+ id);
-                                    }
-                                });
-                            }
-
-
-                        }
-                    });
-                }
-
-
-
+                res.redirect("/publicaciones");
             }
         });
-
-
 
     });
 
@@ -90,8 +67,8 @@ module.exports = function(app,swig,gestorBD) {
             pg = 1;
         }
 
-        gestorBD.obtenerCancionesPg(criterio, pg , function(canciones, total ) {
-            if (canciones == null) {
+        gestorBD.obtenerRestaurantesPg(criterio, pg , function(restaurantes, total ) {
+            if (restaurantes == null) {
                 res.send("Error al listar ");
             } else {
 
@@ -102,7 +79,7 @@ module.exports = function(app,swig,gestorBD) {
 
                 var respuesta = swig.renderFile('views/btienda.html',
                     {
-                        canciones : canciones,
+                        restaurantes : restaurantes,
                         pgActual : pg,
                         pgUltima : pgUltima
                     });
@@ -113,33 +90,42 @@ module.exports = function(app,swig,gestorBD) {
     });
 
     app.get("/publicaciones", function(req, res) {
-        var criterio = { autor : req.session.usuario };
+        var criterio = { "restaurante" : req.session.usuario };
 
-        gestorBD.obtenerCanciones(criterio, function(canciones) {
-            if (canciones == null) {
+        gestorBD.obtenerMenu(criterio, function(menus) {
+            console.log(menus);
+            if (menus == null) {
                 res.send("Error al listar ");
             } else {
                 var respuesta = swig.renderFile('views/bpublicaciones.html',
                     {
-                        canciones : canciones
+                        menus : menus
                     });
                 res.send(respuesta);
             }
         });
     });
 
-    app.get('/cancion/:id', function (req, res) {
+    app.get('/restaurante/:id', function (req, res) {
         var criterio = { "_id" : gestorBD.mongo.ObjectID(req.params.id)  };
 
-        gestorBD.obtenerCanciones(criterio,function(canciones){
-            if ( canciones == null ){
+        gestorBD.obtenerRestaurante(criterio,function(restaurante){
+            if ( restaurante == null ){
                 res.send(respuesta);
             } else {
-                var respuesta = swig.renderFile('views/bcancion.html',
-                    {
-                        cancion : canciones[0]
-                    });
-                res.send(respuesta);
+                criterio = { "restaurante" : restaurante[0].email };
+                gestorBD.obtenerMenu(criterio,function(menus){
+                    if ( menus == null ){
+                        res.send(respuesta);
+                    } else {
+                        var respuesta = swig.renderFile('views/brestaurante.html',
+                            {
+                                restaurante : restaurante[0],
+                                menus: menus
+                            });
+                        res.send(respuesta);
+                    }
+                });
             }
         });
     });

@@ -104,7 +104,7 @@ app.use("/audios/",routerAudios);
 
 // Variables
 app.set('port', process.env.PORT || 8081);
-app.set('db','mongodb://admin:justfoodadmin1@ds127094.mlab.com:27094/justfood');
+app.set('db','mongodb://admin2018:admin2018@ds223063.mlab.com:23063/justfood');
 app.set('clave','9bBmJOP3yGfo1QB1LtSO');
 app.set('crypto',crypto);
 
@@ -114,7 +114,7 @@ require("./routes/rcanciones.js")(app, swig, gestorBD);
 
 
 app.get('/', function (req, res) {
-    res.redirect('/tienda');
+    res.redirect('/index');
 })
 
 app.use( function (err, req, res, next ) {
