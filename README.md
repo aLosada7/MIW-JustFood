@@ -58,3 +58,4 @@ Login -->   Acceso como usuario nos redirige a la "tienda"
 Express modules:
 
 * https://www.npmjs.com/package/express-sanitizer
+* https://www.npmjs.com/package/express-limiter
