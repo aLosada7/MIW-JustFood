@@ -53,4 +53,8 @@ Login -->   Acceso como usuario nos redirige a la "tienda"
             Acceso como restaurante nos redirige al panel de administración del resutaurante (publicaciones)
 
 
-            
+##
+
+Express modules:
+
+* https://www.npmjs.com/package/express-sanitizer
