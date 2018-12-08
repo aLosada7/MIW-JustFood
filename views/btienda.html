@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block titulo %} Tienda – uoMusic {% endblock %}
+{% block titulo %} Restaurantes – Just Food {% endblock %}
 
 
 {% block contenido_principal %}
 <!-- Búsqueda -->
 <div class="row">
     <div id="custom-search-input ">
-        <form method="get" action="/tienda" >
+        <form method="get" action="/restaurantes" >
             <div
                     class="input-group col-xs-8 col-sm-6 col-md-4 col-lg-5 pull-right">
                 <input type="text" class="search-query form-control"
@@ -21,7 +21,6 @@
         </form>
     </div>
 </div>
-<h6>filtro por restaurante funciona, avanzado falta</h6>
 <h2>Comienza tu pedido</h2>
 <h4>Elige un restaurante:</h4>
 <div class="row">
@@ -35,7 +34,7 @@
                 <!-- http://www.socicon.com/generator.php  -->
                 <div class="wrap">{{ restaurante.name }}</div>
                 <div class="small">{{ restaurante.speciality }} </div>
-                <div class="text-right">{{ restaurante.address }}</div>
+                <div class="text-right">{{ restaurante.city }}</div>
             </a>
         </div>
     </div>
@@ -47,34 +46,58 @@
     <ul class="pagination">
         <!-- Primera -->
         <li class="page-item" >
-            <a class="page-link" href="/tienda?pg=1" >Primera</a>
+            <a class="page-link" href="/restaurantes?pg=1" >Primera</a>
         </li>
 
         <!-- Anterior (si la hay ) -->
         {% if pgActual-1 >= 1 %}
         <li class="page-item">
-            <a class="page-link" href="/tienda?pg={{ pgActual -1 }}" >{{ pgActual -1 }}</a>
+            <a class="page-link" href="/restaurantes?pg={{ pgActual -1 }}" >{{ pgActual -1 }}</a>
         </li>
         {% endif %}
 
         <!-- Actual  -->
         <li class="page-item active" >
-            <a class="page-link" href="/tienda?pg={{ pgActual }}">{{ pgActual }}</a>
+            <a class="page-link" href="/restaurantes?pg={{ pgActual }}">{{ pgActual }}</a>
         </li>
 
         <!-- Siguiente (si la hay)  -->
         {% if pgActual+1 <= pgUltima %}
         <li class="page-item">
-            <a class="page-link" href="/tienda?pg={{ pgActual+1 }}" >{{ pgActual+1 }}</a>
+            <a class="page-link" href="/restaurantes?pg={{ pgActual+1 }}" >{{ pgActual+1 }}</a>
         </li>
         {% endif %}
 
         <!-- Última -->
         <li class="page-item" >
-            <a class="page-link" href="/tienda?pg={{ pgUltima }}" >Última</a>
+            <a class="page-link" href="/restaurantes?pg={{ pgUltima }}" >Última</a>
         </li>
     </ul>
 </div>
 
+<!-- Filtro Avanzado -->
+<div class="row">
+    <h2>Busca tu restaurante favorito</h2>
+    <div id="advanced-search">
+        <form method="get" action="/restaurantes" >
+            <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
+                <input type="text" class="search-query form-control"
+                       placeholder="Ciudad" name="ciudad" required/>
+            </div>
+            <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
+                <select class="form-control" name="speciality" required>
+                    <option value="" disabled selected>Elija el tipo de comida</option>
+                    <option value="hamburguesas">Hamburguesas</option>
+                    <option value="bocadillos">Bocadillos</option>
+                    <option value="cocinaautor">Cocina de autor</option>
+                    <option value="pizza">Pizzas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
 

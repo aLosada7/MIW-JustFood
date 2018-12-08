@@ -170,6 +170,24 @@ module.exports = {
             }
         });
     },
+    obtenerPedidos : function(criterio,funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+
+                var collection = db.collection('compras');
+                collection.find(criterio).toArray(function(err, menus) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(menus);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
     insertarMenu : function(cancion, funcionCallback) {
             this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
                 if (err) {

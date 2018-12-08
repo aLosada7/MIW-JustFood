@@ -22,84 +22,49 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var gestorBD = require("./modules/gestorBD.js");
 gestorBD.init(app,mongo);
 
+var expressSanitizer = require('express-sanitizer');
+app.use(expressSanitizer());
+
 //Routers:
 // routerUsuarioSession
 var routerUsuarioSession = express.Router();
 routerUsuarioSession.use(function(req, res, next) {
-    console.log("routerUsuarioSession");
     if ( req.session.usuario ) {
         // dejamos correr la petición
         next();
     } else {
-        console.log("va a : "+req.session.destino)//arreglar
-        res.redirect("/identificarse");
+        res.redirect("/login");
     }
 });
 
 app.use(express.static('public'));
 
 //Aplicar routerUsuarioSession
-app.use("/canciones/agregar",routerUsuarioSession);
-app.use("/publicaciones",routerUsuarioSession);
-app.use("/cancion/comprar",routerUsuarioSession);
-app.use("/compras",routerUsuarioSession);
+app.use("/restaurante/comprar",routerUsuarioSession);
+app.use("/menus",routerUsuarioSession);
+app.use("/pedidos",routerUsuarioSession);
 //routerUsuarioAutor
 var routerUsuarioAutor = express.Router();
 routerUsuarioAutor.use(function(req, res, next) {
-    console.log("routerUsuarioAutor");
     var path = require('path');
     var id = path.basename(req.originalUrl);
     // Cuidado porque req.params no funciona
     // en el router si los params van en la URL.
 
-    gestorBD.obtenerCanciones(
-        { _id : mongo.ObjectID(id) }, function (canciones) {
-            console.log(canciones[0]);
-            if(canciones[0].autor == req.session.usuario ){
+    gestorBD.obtenerMenu(
+        { _id : mongo.ObjectID(id) }, function (menus) {
+            if(menus[0].restaurante == req.session.usuario ){
                 next();
             } else {
-                res.redirect("/tienda");
+                res.redirect("/menus");
             }
         })
 
 });
 
 //Aplicar routerUsuarioAutor
-app.use("/cancion/modificar",routerUsuarioAutor);
-app.use("/cancion/eliminar",routerUsuarioAutor);
-//routerAudios
-var routerAudios = express.Router();
-routerAudios.use(function(req, res, next) {
-    console.log("routerAudios");
-    var path = require('path');
-    var idCancion = path.basename(req.originalUrl, '.mp3');
-
-    gestorBD.obtenerCanciones(
-        { _id : mongo.ObjectID(idCancion) }, function (canciones) {
-
-            if( canciones[0].autor == req.session.usuario ){
-                next();
-            } else {
-                var criterio = {
-                    usuario : req.session.usuario,
-                    cancionId : mongo.ObjectID(idCancion)
-                };
-
-                gestorBD.obtenerCompras(criterio ,function(compras){
-                    if (compras != null && compras.length > 0  ){
-                        next();
-                    } else {
-                        res.redirect("/tienda");
-                    }
-                });
-            }
-        })
-
-});
-
-//Aplicar routerAudios
-app.use("/audios/",routerAudios);
-
+app.use("/menu/modificar",routerUsuarioAutor);
+app.use("/menu/eliminar",routerUsuarioAutor);
 
 
 // Variables
@@ -110,12 +75,12 @@ app.set('crypto',crypto);
 
 //Rutas/controladores por logica
 require("./routes/rusuarios.js")(app, swig, gestorBD);
-require("./routes/rcanciones.js")(app, swig, gestorBD);
+require("./routes/rrestaurantes.js")(app, swig, gestorBD);
 
 
 app.get('/', function (req, res) {
-    res.redirect('/index');
-})
+    res.redirect('/restaurantes');
+});
 
 app.use( function (err, req, res, next ) {
     console.log("Error producido: " + err); //we log the error in our db
@@ -128,6 +93,4 @@ app.use( function (err, req, res, next ) {
 // lanzar el servidor
 app.listen(app.get('port'), function() {
     console.log("Servidor activo");
-})
-
-//mongodb://admin2018:admin2018@ds145223.mlab.com:45223/tiendamusica
+});

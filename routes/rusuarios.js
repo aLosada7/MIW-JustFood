@@ -4,7 +4,7 @@ module.exports = function(app,swig,gestorBD) {
         res.send("ver usuarios");
     });
 
-    app.get("/index", function(req, res) {
+    app.get("/login", function(req, res) {
         var respuesta = swig.renderFile('views/bidentificacion.html', {});
         res.send(respuesta);
     });
@@ -14,23 +14,23 @@ module.exports = function(app,swig,gestorBD) {
             .update(req.body.password).digest('hex');
 
         var criterio = {
-            email : req.body.email,
+            email : req.sanitize(req.body.email),
             password : seguro
         }
 
         gestorBD.obtenerUsuarios(criterio, function(usuarios) {
             if (usuarios == null || usuarios.length == 0) {
                 req.session.usuario = null;
-                res.redirect("/index" +
+                res.redirect("/login" +
                     "?mensaje=Email o password incorrecto"+
                     "&tipoMensaje=alert-danger ");
             } else {
                 req.session.usuario = usuarios[0].email;
                 console.log(usuarios[0].tipoUsuario);
                 if(usuarios[0].tipoUsuario=="Cliente")
-                    res.redirect("/tienda");
+                    res.redirect("/restaurantes");
                 else
-                    res.redirect("/publicaciones");
+                    res.redirect("/menus");
             }
 
         });
@@ -38,7 +38,7 @@ module.exports = function(app,swig,gestorBD) {
 
     app.get('/desconectarse', function (req, res) {
         req.session.usuario = null;
-        res.redirect("/index");
+        res.redirect("/restaurantes");
     });
 
     app.get("/registrarse", function(req, res) {
@@ -67,20 +67,20 @@ module.exports = function(app,swig,gestorBD) {
         console.log(req.params.tipoUsuario);
         if(req.params.tipoUsuario == "Cliente"){
             usuario = {
-                email : req.body.email,
+                email : req.sanitize(req.body.email),
                 password : seguro,
                 tipoUsuario : req.params.tipoUsuario
             }
         }else if(req.params.tipoUsuario == "Restaurante"){
             usuario = {
-                email : req.body.email,
+                email : req.sanitize(req.body).email,
                 password : seguro,
                 tipoUsuario : req.params.tipoUsuario,
-                name : req.body.name,
-                speciality: req.body.speciality,
-                phoneNumber: req.body.phoneNumber,
-                address: req.body.address,
-                city: req.body.city
+                name : req.sanitize(req.body.name),
+                speciality: req.sanitize(req.body.speciality),
+                phoneNumber: req.sanitize(req.body.phoneNumber),
+                address: req.sanitize(req.body.address),
+                city: req.sanitize(req.body.city)
             }
         }
 
@@ -95,17 +95,15 @@ module.exports = function(app,swig,gestorBD) {
                             if (err) {
                                 res.send("Error al subir la imagen");
                             } else {
-                                res.redirect("/index?mensaje=Nuevo usuario registrado");
+                                res.redirect("/login?mensaje=Nuevo usuario registrado");
                             }
                         });
                     }
                 }else{
-                    res.redirect("/index?mensaje=Nuevo usuario registrado");
+                    res.redirect("/login?mensaje=Nuevo usuario registrado");
                 }
             }
         });
-
-
     })
 
 };
