@@ -29,6 +29,7 @@ app.use(expressSanitizer());
 // routerUsuarioSession
 var routerUsuarioSession = express.Router();
 routerUsuarioSession.use(function(req, res, next) {
+    console.log("Router usuario")
     if ( req.session.usuario ) {
         // dejamos correr la petición
         next();
@@ -41,11 +42,37 @@ app.use(express.static('public'));
 
 //Aplicar routerUsuarioSession
 app.use("/restaurante/comprar",routerUsuarioSession);
-app.use("/menus",routerUsuarioSession);
 app.use("/pedidos",routerUsuarioSession);
+
+//routerUsuarioRestaurante
+var routerUsuarioRestaurante = express.Router();
+routerUsuarioRestaurante.use(function(req, res, next) {
+    console.log("Router Restaurant")
+    if(req.session.usuario != null) {
+        gestorBD.obtenerUsuarios(
+            { email : req.session.usuario }, function (usuarios) {
+                console.log(usuarios)
+                if(usuarios[0].tipoUsuario == "Restaurante"){
+                    next();
+                } else {
+                    res.redirect("/restaurantes?mensaje=Solamente los restaurante tienen acceso a este área");
+                }
+            })
+    } else {
+        res.redirect("/login")
+    }
+
+});
+
+//Aplicar routerUsuarioAutor
+app.use("/menus", routerUsuarioRestaurante);
+
 //routerUsuarioAutor
 var routerUsuarioAutor = express.Router();
 routerUsuarioAutor.use(function(req, res, next) {
+
+    console.log("Router autor")
+
     var path = require('path');
     var id = path.basename(req.originalUrl);
     // Cuidado porque req.params no funciona
