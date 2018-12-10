@@ -63,7 +63,7 @@ module.exports = {
             } else {
 
                 var collection = db.collection('usuarios');
-                collection.count(function(err, count){
+                collection.count({ tipoUsuario: "Restaurante"},function(err, count){
 
                     collection.find(criterio).skip( (pg-1)*4 ).limit( 4 )
                         .toArray(function(err, restaurantes) {
