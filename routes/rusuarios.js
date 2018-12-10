@@ -73,7 +73,7 @@ module.exports = function(app,swig,gestorBD) {
             }
         }else if(req.params.tipoUsuario == "Restaurante"){
             usuario = {
-                email : req.sanitize(req.body).email,
+                email : req.sanitize(req.body.email),
                 password : seguro,
                 tipoUsuario : req.params.tipoUsuario,
                 name : req.sanitize(req.body.name),

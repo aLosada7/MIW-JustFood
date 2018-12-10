@@ -29,7 +29,7 @@ module.exports = function(app,swig,gestorBD) {
             } else {
                 res.redirect("/menus" +
                     "?mensaje=Menú insertado correctamente"+
-                    "&tipoMensaje=alert-succes ");
+                    "&tipoMensaje=alert-success ");
             }
         });
 
