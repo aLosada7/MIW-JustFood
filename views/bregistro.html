@@ -3,8 +3,7 @@
 {% block titulo %} Registrar usuario {% endblock %} 
 
 {% block contenido_principal %}
-  <h2>Registrar usuario</h2>
-  <h4>¿Qué eres?</h4>
-  <a type="button" class="btn btn-primary" href="/registrarseUsuario">Usuario</a>
-  <a type="button" class="btn btn-primary" href="/registrarseRestaurante">Restaurante</a>
+  <h2 style="text-align: center">¿Qué tipo de usuario eres?</h2><br>
+  <a type="button" class="btn btn-primary btn-block" href="/registrarseUsuario"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Cliente</a>
+  <a type="button" class="btn btn-primary btn-block" href="/registrarseRestaurante"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> Restaurante</a>
 {% endblock %}
