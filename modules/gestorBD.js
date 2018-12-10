@@ -63,9 +63,9 @@ module.exports = {
             } else {
 
                 var collection = db.collection('usuarios');
-                collection.count(function(err, count){
+                collection.count({ tipoUsuario: "Restaurante"},function(err, count){
 
-                    collection.find(criterio).skip( (pg-1)*4 ).limit( 4 )
+                    collection.find(criterio).skip( (pg-1)*6 ).limit( 6 )
                         .toArray(function(err, restaurantes) {
 
                             if (err) {
@@ -189,20 +189,20 @@ module.exports = {
         });
     },
     insertarMenu : function(cancion, funcionCallback) {
-            this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
-                if (err) {
-                    funcionCallback(null);
-                } else {
-                    var collection = db.collection('menus');
-                    collection.insert(cancion, function(err, result) {
-                        if (err) {
-                            funcionCallback(null);
-                        } else {
-                            funcionCallback(result.ops[0]._id);
-                        }
-                        db.close();
-                    });
-                }
-            });
-        }
-    };
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('menus');
+                collection.insert(cancion, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result.ops[0]._id);
+                    }
+                    db.close();
+                });
+            }
+        });
+    }
+};

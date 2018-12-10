@@ -59,8 +59,8 @@ module.exports = function(app,swig,gestorBD) {
                     "&tipoMensaje=alert-danger ");
             } else {
 
-                var pgUltima = total/4;
-                if (total % 4 > 0 ){ // Sobran decimales
+                var pgUltima = total/6;
+                if (total % 6 > 0 ){ // Sobran decimales
                     pgUltima = pgUltima+1;
                 }
 
