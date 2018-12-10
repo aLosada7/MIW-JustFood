@@ -26,6 +26,9 @@
             <h3>{{ menu.nombre }}</h3>
             <p>Primer plato: {{ menu.primerPlato }}</p>
             <p>Segundo plato: {{ menu.segundoPlato }}</p>
+            {% if menu.tercerPlato != "" %}
+            <p>Tercer plato: {{ menu.tercerPlato }}</p>
+            {% endif %}
             <p>Postre: {{ menu.postre }}</p>
             <p>Precio: {{ menu.precio }} €</p>
             <a class="btn btn-primary"
