@@ -9,16 +9,11 @@
     <div class="col-sm-6"><h2>Comienza tu pedido</h2></div>
     <div class="col-sm-6"><br>
         <div id="custom-search-input">
-            <form method="get" action="/restaurantes" >
-                <div class="input-group col-xs-8 col-sm-6 col-md-4 col-lg-5 pull-right">
-                    <input type="text" class="search-query form-control"
-                           placeholder="Nombre del restaurante" name="busqueda"/>
-                    <span class="input-group-btn">
-					<button class="btn" type="submit">
-						<span class="glyphicon glyphicon-search"></span>
-					</button>
-				</span>
-                </div>
+            <form method="get" action="/restaurantes" class="form-inline my-2 my-lg-0">
+                <input type="search" class="form-control mr-sm-2" placeholder="Nombre del restaurante" name="busqueda"/>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+						Buscar
+                </button>
             </form>
     </div>
     </div>
@@ -53,8 +48,8 @@
             <!-- http://librosweb.es/libro/bootstrap_3/capitulo_2/tipos_de_rejillas.html -->
             <!-- Inicio del Bloque canción  -->
             {% for restaurante in restaurantes %}
-            <div class="col-md-4 col-xs-6">
-                <div style="width: 200px">
+            <div class="col-4">
+                <div class="card" style="width: 200px">
                     <a href="/restaurante/{{ restaurante._id.toString() }}"> <img src="/imgRestaurantes/{{ restaurante._id.toString() }}.png" alt="logo" />
                         <!-- http://www.socicon.com/generator.php  -->
                         <div class="wrap">{{ restaurante.name }}</div>

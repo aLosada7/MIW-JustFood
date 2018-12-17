@@ -106,7 +106,7 @@ require("./routes/rrestaurantes.js")(app, swig, gestorBD);
 
 
 app.get('/', function (req, res) {
-    res.redirect('/restaurantes');
+    res.redirect('/cover');
 });
 
 app.use( function (err, req, res, next ) {
