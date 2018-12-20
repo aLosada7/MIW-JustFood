@@ -4,7 +4,7 @@ module.exports = function(app,swig,gestorBD) {
         res.send("ver usuarios");
     });
 
-    app.get("/login", function(req, res) {
+    app.get("/cover", function(req, res) {
         var respuesta = swig.renderFile('views/bidentificacion.html', {});
         res.send(respuesta);
     });
@@ -38,7 +38,8 @@ module.exports = function(app,swig,gestorBD) {
 
     app.get('/desconectarse', function (req, res) {
         req.session.usuario = null;
-        res.redirect("/restaurantes");
+        var respuesta = swig.renderFile('views/bidentificacion.html', {});
+        res.send(respuesta);
     });
 
     app.get("/registrarse", function(req, res) {

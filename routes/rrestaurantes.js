@@ -35,11 +35,6 @@ module.exports = function(app,swig,gestorBD) {
 
     });
 
-    app.get("/cover", function(req, res) {
-        var respuesta = swig.renderFile('views/cover.html', {});
-        res.send(respuesta);
-    });
-
     app.get("/restaurantes", function(req, res) {
         var criterio = {"tipoUsuario": "Restaurante"};
 

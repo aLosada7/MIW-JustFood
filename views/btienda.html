@@ -6,8 +6,16 @@
 {% block contenido_principal %}
 <!-- Búsqueda -->
 <div class="row">
-    <div class="col-sm-6"><h2>Comienza tu pedido</h2></div>
-    <div class="col-sm-6"><br>
+    <div class="col-8">
+        <div aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Elige un restaurante</li>
+                <li class="breadcrumb-item">Elige tu menú</li>
+                <li class="breadcrumb-item">Resumen del pedido</li>
+            </ol>
+        </div>
+    </div>
+    <div class="col-4">
         <div id="custom-search-input">
             <form method="get" action="/restaurantes" class="form-inline my-2 my-lg-0">
                 <input type="search" class="form-control mr-sm-2" placeholder="Nombre del restaurante" name="busqueda"/>
@@ -19,7 +27,7 @@
     </div>
 </div><br>
 <div class="row">
-    <div class="col-sm-2">
+    <div class="col-3">
             <div id="advanced-search">
                 <form method="get" action="/restaurantes" >
                     <div class="form-group">
@@ -42,7 +50,7 @@
 
         </div>
     </div>
-    <div class="col-sm-10">
+    <div class="col-9">
         <div class="row" style="text-align: center;">
 
             <!-- http://librosweb.es/libro/bootstrap_3/capitulo_2/tipos_de_rejillas.html -->
@@ -51,10 +59,11 @@
             <div class="col-4">
                 <div class="card" style="width: 200px">
                     <a href="/restaurante/{{ restaurante._id.toString() }}"> <img src="/imgRestaurantes/{{ restaurante._id.toString() }}.png" alt="logo" />
-                        <!-- http://www.socicon.com/generator.php  -->
+                     <div class="card-body">
                         <div class="wrap">{{ restaurante.name }}</div>
                         <div class="small">{{ restaurante.speciality }} </div>
                         <div class="small">{{ restaurante.city }}</div>
+                    </div>
                     </a>
                 </div>
             </div>
