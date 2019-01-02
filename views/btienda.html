@@ -8,14 +8,14 @@
 <div class="row">
     <div class="col-8">
         <div aria-label="breadcrumb">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb arr-right">
                 <li class="breadcrumb-item active" aria-current="page">Elige un restaurante</li>
                 <li class="breadcrumb-item">Elige tu menú</li>
                 <li class="breadcrumb-item">Resumen del pedido</li>
             </ol>
         </div>
     </div>
-    <div class="col-4">
+    <div class="col-4" style="padding: 0.3%">
         <div id="custom-search-input">
             <form method="get" action="/restaurantes" class="form-inline my-2 my-lg-0">
                 <input type="search" class="form-control mr-sm-2" placeholder="Nombre del restaurante" name="busqueda"/>
@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="col-9">
-        <div class="row" style="text-align: center;">
+        <div class="row text-center justify-content-center" style="text-align: center;">
 
             <!-- http://librosweb.es/libro/bootstrap_3/capitulo_2/tipos_de_rejillas.html -->
             <!-- Inicio del Bloque canción  -->
@@ -70,8 +70,9 @@
             {% endfor %}
             <!-- Fin del Bloque canción  -->
         </div>
+        <br>
         <!-- Paginación mostrar la actual y 2 anteriores y dos siguientes -->
-        <div class="row text-center">
+        <div class="row text-center justify-content-center">
             <ul class="pagination">
                 <!-- Primera -->
                 <li class="page-item" >

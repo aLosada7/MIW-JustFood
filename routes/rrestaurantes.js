@@ -5,6 +5,13 @@ module.exports = function(app,swig,gestorBD) {
 
         });
         res.send(respuesta);
+    });
+
+    app.get('/vacio', function (req, res) {
+        var respuesta = swig.renderFile('views/vacio.html', {
+
+        });
+        res.send(respuesta);
     })
 
     app.post("/menu", function(req, res) {

@@ -1,4 +1,5 @@
 body{
+    height: 100%;
     background: url("https://images.pexels.com/photos/1682820/pexels-photo-1682820.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
 }
 
@@ -6,9 +7,14 @@ h1 {
     font-style: italic;
 }
 
+.my-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .form-container {
     background: #fff;
-    padding: 30px;
+    padding: 5%;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px #000;
 }

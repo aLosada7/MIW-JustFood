@@ -1,31 +1,30 @@
 {% extends "base.html" %}
 
+{% block titulo %} Restaurantes – Just Food {% endblock %}
+
 {% block contenido_principal %}
-<div class="row">
-    <div class="col-8">
-        <div aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">Elige un restaurante</li>
-                <li class="breadcrumb-item active" aria-current="page">Elige tu menú</li>
-                <li class="breadcrumb-item">Resumen del pedido</li>
-            </ol>
-        </div>
-    </div>
-    <div class="col-4">
-
-    </div>
-</div><br>
+<div aria-label="breadcrumb">
+    <ol class="breadcrumb arr-right">
+        <li class="breadcrumb-item">Elige un restaurante</li>
+        <li class="breadcrumb-item active" aria-current="page">Elige tu menú</li>
+        <li class="breadcrumb-item">Resumen del pedido</li>
+    </ol>
+</div>
+<br>
 
 <div class="row">
+    <div class="col-2"></div>
     <div class="col-4">
         <img class="media-object" src="/imgRestaurantes/{{ restaurante._id.toString() }}.png">
     </div>
-    <div class="col-8 media-body text-center">
+    <div class="col-4 media-body text-center">
         <h2>{{ restaurante.name }}</h2>
         <p><i class="fa fa-cutlery" aria-hidden="true"></i> {{ restaurante.speciality }}</p>
         <p><i class="fa fa-phone" aria-hidden="true"></i> {{ restaurante.phoneNumber }}</p>
-        <p><i class="fa fa-location-arrow" aria-hidden="true"></i> {{ restaurante.address }} ({{ restaurante.city }})</p>
+        <p><i class="fa fa-location-arrow" aria-hidden="true"></i> {{ restaurante.address }}</p>
+        <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ restaurante.city }}</p>
     </div>
+    <div class="col-2"></div>
 </div>
 
 <br><br>
@@ -33,8 +32,8 @@
 <div class="row">
     {% for menu in menus %}
     <div class="col-4">
-        <div class="card">
-            <h3 class="text-center">{{ menu.nombre }}</h3>
+        <div class="card" style="padding: 2%;">
+            <h4 class="text-center">{{ menu.nombre }}</h4>
             <div class="row">
                 <div class="col" style="text-align:right">
                     <p>Primer plato</p>
