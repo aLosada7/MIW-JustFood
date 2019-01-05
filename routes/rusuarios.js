@@ -1,7 +1,31 @@
-module.exports = function(app,swig,gestorBD) {
+module.exports = function(app,swig,gestorBD, moment) {
 
     app.get("/usuarios", function(req, res) {
         res.send("ver usuarios");
+    });
+
+    app.get('/pedidos', function (req, res) {
+        var criterio = { "usuario" : req.session.usuario };
+
+        gestorBD.obtenerPedidos(criterio ,function(pedidos){
+
+            if (pedidos == null) {
+                res.redirect("/restaurantes" +
+                    "?mensaje=Se ha producido un error al intentar recuperar sus pedidos."+
+                    "&tipoMensaje=alert-danger ");
+            } else {
+
+                pedidos.forEach(p => {
+                    p.fecha = moment(p.fecha).locale("es").calendar();
+                })
+
+                var respuesta = swig.renderFile('views/bcompras.html',
+                    {
+                        pedidos: pedidos
+                    });
+                res.send(respuesta);
+            }
+        });
     });
 
     app.get("/login", function(req, res) {

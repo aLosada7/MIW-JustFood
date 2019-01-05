@@ -206,22 +206,6 @@ module.exports = function(app,swig,gestorBD) {
         });
     })
 
-    app.get('/pedidos', function (req, res) {
-        var criterio = { "usuario" : req.session.usuario };
-
-        gestorBD.obtenerPedidos(criterio ,function(pedidos){
-            if (pedidos == null) {
-                res.send("Error al listar ");
-            } else {
-                var respuesta = swig.renderFile('views/bcompras.html',
-                    {
-                    pedidos: pedidos
-                    });
-                res.send(respuesta);
-            }
-        });
-    })
-
     app.post('/menu/modificar/:id', function (req, res) {
 
         var id = req.params.id;

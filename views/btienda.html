@@ -66,7 +66,7 @@
             {% for restaurante in restaurantes %}
             <div class="col-4">
                 <div class="card" style="width: 200px">
-                    <a href="/restaurante/{{ restaurante._id.toString() }}"> <img src="/imgRestaurantes/{{ restaurante._id.toString() }}.png" alt="logo" />
+                    <a href="/restaurante/{{ restaurante._id.toString() }}"> <img src="/imgRestaurantes/{{ restaurante._id.toString() }}.png" alt="logo" style="width: 200px" />
                      <div class="card-body">
                         <div class="wrap">{{ restaurante.name }}</div>
                         <div class="small">{{ restaurante.speciality }} </div>

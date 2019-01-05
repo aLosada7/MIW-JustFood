@@ -10,6 +10,7 @@ app.use(expressSession({//interesante cuanto tiempo tarda en expirar la sesión
     resave: true,
     saveUninitialized: true
 }));
+var moment = require('moment');
 var crypto = require('crypto');
 var fileUpload = require('express-fileupload');
 app.use(fileUpload());
@@ -101,7 +102,7 @@ app.set('clave','9bBmJOP3yGfo1QB1LtSO');
 app.set('crypto',crypto);
 
 //Rutas/controladores por logica
-require("./routes/rusuarios.js")(app, swig, gestorBD);
+require("./routes/rusuarios.js")(app, swig, gestorBD, moment);
 require("./routes/rrestaurantes.js")(app, swig, gestorBD);
 
 

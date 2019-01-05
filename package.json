@@ -12,6 +12,7 @@
     "express-fileupload": "^0.2.0",
     "express-sanitizer": "^1.0.4",
     "express-session": "^1.15.6",
+    "moment": "^2.23.0",
     "mongodb": "^2.2.33",
     "swig": "^1.4.2"
   }
