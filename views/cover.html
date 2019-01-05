@@ -13,12 +13,32 @@
 </head>
 <body class="text-center container">
 <div class="container-fluid justify-content-center row">
-    <div class="col-6 form-container center">
+    <div id="loginPane" class="col-6 form-container center">
         <!-- Contenido -->
         {% block contenido_principal %}
         <!-- Posible contenido por defecto -->
         {% endblock %}
     </div>
 </div>
+<script>
+    var mensaje = getUrlParameter('mensaje');
+    var tipoMensaje = getUrlParameter('tipoMensaje');
+
+    if ( mensaje != ""){
+        if (tipoMensaje == "" ){
+            tipoMensaje = 'alert-info';
+        }
+        $( "#loginPane" )
+            .prepend("<div class='alert "+tipoMensaje+"'>"+mensaje+" </div>");
+    }
+
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' :
+            decodeURIComponent(results[1].replace(/\+/g, ' '));
+    };
+</script>
 </body>
 </html>

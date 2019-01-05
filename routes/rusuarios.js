@@ -4,7 +4,7 @@ module.exports = function(app,swig,gestorBD) {
         res.send("ver usuarios");
     });
 
-    app.get("/cover", function(req, res) {
+    app.get("/login", function(req, res) {
         var respuesta = swig.renderFile('views/bidentificacion.html', {});
         res.send(respuesta);
     });
