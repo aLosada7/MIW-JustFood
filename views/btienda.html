@@ -51,10 +51,18 @@
         </div>
     </div>
     <div class="col-9">
+        {% if busqueda == true %}
+        {% if restaurantes.length != 0 %}
+        <div class="alert alert-success" role="alert">
+            Hemos encontrados {{restaurantes.length}} para ti.
+        </div>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            No hemos encontrado ningún restaurante con esas características.
+        </div>
+        {% endif %}
+        {% endif %}
         <div class="row text-center justify-content-center" style="text-align: center;">
-
-            <!-- http://librosweb.es/libro/bootstrap_3/capitulo_2/tipos_de_rejillas.html -->
-            <!-- Inicio del Bloque canción  -->
             {% for restaurante in restaurantes %}
             <div class="col-4">
                 <div class="card" style="width: 200px">

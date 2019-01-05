@@ -43,13 +43,16 @@ module.exports = function(app,swig,gestorBD) {
     });
 
     app.get("/restaurantes", function(req, res) {
+        var busqueda = false;
         var criterio = {"tipoUsuario": "Restaurante"};
 
         if( req.query.busqueda != null ){
+            busqueda = true;
             criterio = { "name" : req.query.busqueda};
         }
 
         if( req.query.ciudad != null && req.query.speciality != null){
+            busqueda = true;
             criterio = { "city" : req.query.ciudad,
                         "speciality" : req.query.speciality};
         }
@@ -73,6 +76,7 @@ module.exports = function(app,swig,gestorBD) {
 
                 var respuesta = swig.renderFile('views/btienda.html',
                     {
+                        busqueda: busqueda,
                         restaurantes : restaurantes,
                         pgActual : pg,
                         pgUltima : pgUltima

@@ -61,9 +61,9 @@ module.exports = {
             if (err) {
                 funcionCallback(null);
             } else {
-
+                criterio.tipoUsuario = "Restaurante"
                 var collection = db.collection('usuarios');
-                collection.count({ tipoUsuario: "Restaurante"},function(err, count){
+                collection.count(criterio,function(err, count){
 
                     collection.find(criterio).skip( (pg-1)*6 ).limit( 6 )
                         .toArray(function(err, restaurantes) {
