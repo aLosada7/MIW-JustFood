@@ -3,8 +3,15 @@
 {% block titulo %} Modificar menú {% endblock %}
 
 {% block contenido_principal %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/menus">Mis menús</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Modificar menú</li>
+    </ol>
+</nav>
 <h2>Modificar menú</h2>
-<p>Los menús incluyen primer plato, segundo plato, tercer plato(opcional), postre y precio.</p>
+
+<br>
 <div class="row justify-content-md-center">
     <div class="col-8">
         <form class="form-horizontal" method="post" action="/menu/modificar/{{ menu._id.toString() }}">

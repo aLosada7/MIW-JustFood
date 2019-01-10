@@ -1,6 +1,11 @@
 body{
     height: 100%;
-    background: url("https://images.pexels.com/photos/1682820/pexels-photo-1682820.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background: url("https://images.pexels.com/photos/326278/pexels-photo-326278.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
 }
 
 h1 {
@@ -18,3 +23,9 @@ h1 {
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px #000;
 }
+
+.panelRegistro{
+    width: 60%;
+    margin: 10% auto;
+}
+

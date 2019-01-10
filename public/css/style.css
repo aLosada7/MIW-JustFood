@@ -1,9 +1,5 @@
-nav {
-    margin-bottom: 2%;
-}
-
-.infoRestaurante{
-    padding: 3%;
+body {
+    background-color: #464646;
 }
 
 .arr-right .breadcrumb-item+.breadcrumb-item::before {
@@ -18,11 +14,4 @@ nav {
 
     line-height: 18px;
 
-}
-
-footer {
-    background-color: #262626;
-    text-align: center;
-    padding: 0.5%;
-    margin-top: 5%;
 }
