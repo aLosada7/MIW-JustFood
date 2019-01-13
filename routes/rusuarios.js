@@ -1,5 +1,15 @@
 module.exports = function(app,swig,gestorBD, moment) {
 
+    app.get("/conocenos", function(req, res) {
+        var respuesta = swig.renderFile('views/SobreNosotros.html');
+        res.send(respuesta);
+    });
+
+    app.get("/inverte", function(req, res) {
+        var respuesta = swig.renderFile('views/formularioInversion.html');
+        res.send(respuesta);
+    });
+
     app.get("/usuarios", function(req, res) {
         res.send("ver usuarios");
     });
