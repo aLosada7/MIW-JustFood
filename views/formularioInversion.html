@@ -44,11 +44,11 @@
                 <label class="col-sm-4 col-form-label text-right">¿Representa a una empresa?</label>
                 <div class="col-sm-8">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="si">
+                        <input class="form-check-input" type="radio" name="OpcionesEmpresa" id="inlineRadio1" value="si">
                         <label class="form-check-label" for="inlineRadio1">Si</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="no">
+                        <input class="form-check-input" type="radio" name="OpcionesEmpresa" id="inlineRadio2" value="no">
                         <label class="form-check-label" for="inlineRadio2">No</label>
                     </div>
                 </div>
@@ -80,11 +80,11 @@
                     <label class="col-sm-4 col-form-label text-right">¿Es una multinacional?</label>
                     <div class="col-sm-8">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="multinacionalSi" value="si">
+                            <input class="form-check-input" type="radio" name="OpcionesMultinacional" id="multinacionalSi" value="si">
                             <label class="form-check-label" for="multinacionalSi">Si</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="multinacionalNo" value="no">
+                            <input class="form-check-input" type="radio" name="OpcionesMultinacional" id="multinacionalNo" value="no">
                             <label class="form-check-label" for="multinacionalNo">No</label>
                         </div>
                     </div>
@@ -96,11 +96,11 @@
                     <label class="col-sm-4 col-form-label text-right" for="nombreEmpresa">Invierte en otras empresas:</label>
                     <div class="col-sm-8">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inversionesSi" value="si">
+                            <input class="form-check-input" type="radio" name="OpcionesInversiones" id="inversionesSi" value="si">
                             <label class="form-check-label" for="inversionesSi">Si</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inversionesNo" value="no">
+                            <input class="form-check-input" type="radio" name="OpcionesInversiones" id="inversionesNo" value="no">
                             <label class="form-check-label" for="inversionesNo">No</label>
                         </div>
                     </div>
@@ -130,6 +130,62 @@
                                placeholder="0" required="true" min="100" max="1000000"/>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label text-right" for="sector">Disponibilidad:</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select mr-sm-2" id="sector">
+                            <option selected></option>
+                            <option value="1">Inmediatia</option>
+                            <option value="2">Más de un mes</option>
+                            <option value="2">Más de seis meses</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="datosContacto">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label text-right" for="datetimepicker1">Fecha & hora de contacto:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3>Datos de contacto</h3>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label text-right" for="nombreEmpresa">Concretar llamadas:</label>
+                    <div class="col-sm-8">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OpcionesLlamadas" id="llamadasSi" value="si">
+                            <label class="form-check-label" for="llamadasSi">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="OpcionesLlamadas" id="llamadasNo" value="no">
+                            <label class="form-check-label" for="llamadasNo">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label text-right" for="telefono">Teléfono:</label>
+                    <div class="col-sm-8">
+                        <input type="tel" class="form-control" id="telefono"
+                               pattern="[0-9]{9}" required="true"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label text-right" for="datetimepicker1">Fecha & hora de contacto:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Enviar</button>
@@ -138,4 +194,11 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+    });
+</script>
+
 {% endblock %}
+
