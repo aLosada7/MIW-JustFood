@@ -5,6 +5,26 @@ module.exports = function(app,swig,gestorBD, moment) {
         res.send(respuesta);
     });
 
+    app.get("/casosExito", function(req, res) {
+        var respuesta = swig.renderFile('views/casosExito.html');
+        res.send(respuesta);
+    });
+
+    app.get("/equipo", function(req, res) {
+        var respuesta = swig.renderFile('views/equipo.html');
+        res.send(respuesta);
+    });
+
+    app.get("/objetivo", function(req, res) {
+        var respuesta = swig.renderFile('views/objetivo.html');
+        res.send(respuesta);
+    });
+
+    app.get("/metodologia", function(req, res) {
+        var respuesta = swig.renderFile('views/metodologia.html');
+        res.send(respuesta);
+    });
+
     app.get("/inverte", function(req, res) {
         var respuesta = swig.renderFile('views/formularioInversion.html');
         res.send(respuesta);
