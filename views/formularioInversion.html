@@ -2,6 +2,16 @@
 
 {% block titulo %} Invierta Nosotros – Just Food {% endblock %}
 
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/scripts/form.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+{% endblock %}
 
 {% block contenido_principal %}
 
@@ -44,36 +54,36 @@
                 <label class="col-sm-4 col-form-label text-right">¿Representa a una empresa?</label>
                 <div class="col-sm-8">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="OpcionesEmpresa" id="inlineRadio1" value="si">
-                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                        <input class="form-check-input" type="radio" name="OpcionesEmpresa" id="empresaSi" value="si">
+                        <label class="form-check-label" for="empresaSi">Si</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="OpcionesEmpresa" id="inlineRadio2" value="no">
-                        <label class="form-check-label" for="inlineRadio2">No</label>
+                        <input class="form-check-input" type="radio" name="OpcionesEmpresa" id="empresaNo" value="no">
+                        <label class="form-check-label" for="empresaNo">No</label>
                     </div>
                 </div>
             </div>
-            <div id="datosEmpresa">
+            <div id="datosEmpresa" hidden>
                 <h3>Datos Empresariales</h3>
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label text-right" for="nombreEmpresa">Nombre:</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="nombreEmpresa"
-                               placeholder="Nombre de la empresa" required="true" pattern="[a-zA-Z\s]+"/>
+                               placeholder="Nombre de la empresa" pattern="[a-zA-Z\s]+"/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label text-right" for="cargo">Cargo:</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="cargo"
-                               placeholder="Cargo que ocupa en la empresa" required="true" pattern="[a-zA-Z\s]+"/>
+                               placeholder="Cargo que ocupa en la empresa" pattern="[a-zA-Z\s]+"/>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label text-right" for="paisEmpresa">Pais:</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="paisEmpresa"
-                               placeholder="Pais en el que se ubica su empresa" required="true" pattern="[a-zA-Z\s]+"/>
+                               placeholder="Pais en el que se ubica su empresa" pattern="[a-zA-Z\s]+"/>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -105,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div id="bloqueSector" class="form-group row" hidden>
                     <label class="col-sm-4 col-form-label text-right" for="sector">Sector:</label>
                     <div class="col-sm-8">
                         <select class="custom-select mr-sm-2" id="sector">
@@ -131,9 +141,9 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-4 col-form-label text-right" for="sector">Disponibilidad:</label>
+                    <label class="col-sm-4 col-form-label text-right" for="disponibilidad">Disponibilidad:</label>
                     <div class="col-sm-8">
-                        <select class="custom-select mr-sm-2" id="sector">
+                        <select class="custom-select mr-sm-2" id="disponibilidad">
                             <option selected></option>
                             <option value="1">Inmediatia</option>
                             <option value="2">Más de un mes</option>
@@ -143,17 +153,6 @@
                 </div>
             </div>
             <div id="datosContacto">
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label text-right" for="datetimepicker1">Fecha & hora de contacto:</label>
-                    <div class="col-sm-8">
-                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <h3>Datos de contacto</h3>
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label text-right" for="nombreEmpresa">Concretar llamadas:</label>
@@ -168,21 +167,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div id="bloqueTelefono" class="form-group row" hidden>
                     <label class="col-sm-4 col-form-label text-right" for="telefono">Teléfono:</label>
                     <div class="col-sm-8">
                         <input type="tel" class="form-control" id="telefono"
-                               pattern="[0-9]{9}" required="true"/>
+                               pattern="[0-9]{9}"/>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label text-right" for="datetimepicker1">Fecha & hora de contacto:</label>
-                    <div class="col-sm-8">
-                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
+                <div id="bloqueCita" class="form-group row" hidden>
+                    <label class="col-sm-4 col-form-label text-right" for="datetimepicker1">Cita:</label>
+                    <div class='col-sm-8'>
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -193,12 +192,6 @@
         </form>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
-</script>
 
 {% endblock %}
 
