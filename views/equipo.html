@@ -5,14 +5,21 @@
 
 {% block contenido_principal %}
 
-<div class="card border-light mb-3">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/conocenos">Sobre nosotros</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nuestro equipo</li>
+    </ol>
+</nav>
+
+<div class="card border-light mb-3 margenes">
     <h1 class="text-center">Nuestro equipo</h1>
     <div class="col-md-12 mt-4 pb-3">
-        <p>nuestro equipo está formado por destacados ejecutivos procedentes de firmas
+        <p>Nuestro equipo está formado por destacados ejecutivos procedentes de firmas
             de consultoría, puestos directivos, capital riesgo y banca de inversión, todos
             ellos con una dilatada experiencia en el sector de la reestructuración
             empresarial.</p>
-        <p>además, nos asociamos con equipos gestores en la ejecución de los planes de
+        <p>Además, nos asociamos con equipos gestores en la ejecución de los planes de
             viabilidad y de reestructuración de las compañías objetivo.</p>
     </div>
 </div>

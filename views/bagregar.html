@@ -9,51 +9,54 @@
         <li class="breadcrumb-item active" aria-current="page">Agregar menú</li>
     </ol>
 </nav>
-<h2>Agregar menú</h2>
+
+<div class="card border-light mb-3 margenes">
+    <h1 class="text-center">Agregar menú</h1>
 
 <br>
-<div class="row justify-content-md-center">
-    <div class="col-8">
-        <form class="form-horizontal" method="post" action="/menu">
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label text-right" for="nombre">Nombre:</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" name="nombre"
-                           placeholder="Nombre del menú" required="true" />
+    <div class="row justify-content-md-center">
+        <div class="col-8">
+            <form class="form-horizontal" method="post" action="/menu">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label text-right" for="nombre">Nombre:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="nombre"
+                               placeholder="Nombre del menú" required="true" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label text-right" for="primerPlato">Primer plato:</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" name="primerPlato"
-                           placeholder="Primer plato" required="true" />
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label text-right" for="primerPlato">Primer plato:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="primerPlato"
+                               placeholder="Primer plato" required="true" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label text-right" for="segundoPlato">Segundo plato:</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" name="segundoPlato"
-                           placeholder="Segundo plato" required="true" />
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label text-right" for="segundoPlato">Segundo plato:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="segundoPlato"
+                               placeholder="Segundo plato" required="true" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label text-right" for="postre">Postre:</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" name="postre"
-                           placeholder="Postre" required="true" />
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label text-right" for="postre">Postre:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="postre"
+                               placeholder="Postre" required="true" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label text-right" for="precio">Precio (€):</label>
-                <div class="col-sm-8">
-                    <input type="number" class="form-control" name="precio"
-                           placeholder="2.50" required="true" />
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label text-right" for="precio">Precio (€):</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="precio"
+                               placeholder="2.50" required="true" />
+                    </div>
                 </div>
-            </div>
-            <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Agregar menú</button>
-            </div>
-        </form>
+                <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Agregar menú</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

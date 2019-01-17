@@ -11,7 +11,6 @@
             <ol class="breadcrumb arr-right">
                 <li class="breadcrumb-item active" aria-current="page">Elige un restaurante</li>
                 <li class="breadcrumb-item">Elige tu menú</li>
-                <li class="breadcrumb-item">Resumen del pedido</li>
             </ol>
         </div>
     </div>
@@ -64,7 +63,7 @@
         {% endif %}
         <div class="row text-center justify-content-center" style="text-align: center;">
             {% for restaurante in restaurantes %}
-            <div class="col-4">
+            <div class="col-4" style="padding-bottom: 2%;">
                 <div class="card" style="width: 200px">
                     <a href="/restaurante/{{ restaurante._id.toString() }}"> <img src="/imgRestaurantes/{{ restaurante._id.toString() }}.png" alt="logo" style="width: 200px" />
                      <div class="card-body">
