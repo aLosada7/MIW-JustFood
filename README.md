@@ -1,61 +1,45 @@
-# Diseño y Programación de Interfaces de Usuario
+# Just Food
 
-## Entidades
+## Entities
 
-* Usuario - Puede realizar pedidos
-    * email
-    * contraseña
-    * Nombre y apellidos
-    * Dirección
-    * Tipo Usuario
+* User - Can place orders
+    * Email
+    * Password
+    * Name and surname
+    * Address
+    * User type
     
-* Restaurante - Puede dar de manejar menús
-    * email
-    * contraseña
-    * Nombre
-    * Tipo restaurante
-    * Telefono
-    * Dirección
-    * Ciudad
-    * Provincia
-    * Tipo Usuario
-    * Foto 
+* Restaurant - Can manage menus
+    * Email
+    * Password
+    * Name of the restaurant
+    * Food kind
+    * Phone
+    * Address
+    * City
+    * Province
+    * User type
+    * Pic/photo 
 
-(USAR UNA SOLA ENTIDAD, LOS CAMPOS DE RESTAURANTE SERÍAN OPCIONALES)
- 
-* Menu
-    * Nombre
-    * Platos  
-    * Precio
+* Menus
+    * Name
+    * Dishes  
+    * Price of the menu
 
-* Pedidos
-    usuario
-    restaurante
-    menu
-    fecha
+* Orders
+    User
+    Restaurant
+    Menu
+    Date of the order
 
-## Acciones
+## Actions
 
-Realizar Pedido
-Añadir Menús
-Alta restaurante/Usuario
+Order a menu
+Add a menu
+Restaurant/user sign up
 
 
-## Flujo navegación
-
-Acceso a la raiz --> redirección a la "tienda". SOLAMENTE UN USUARIO REGISTRADO PUEDE REALIZAR PEDIDOS
-
-Registro --> Elección Registro Usuario/Restaurante
-    Registro Usuario: Alta de usuarios
-    Registro Restaurante: Alta restaurante
-    
-Login -->   Acceso como usuario nos redirige a la "tienda"
-            Acceso como restaurante nos redirige al panel de administración del resutaurante (publicaciones)
-
-
-##
-
-Express modules:
+## Express modules
 
 * https://www.npmjs.com/package/express-sanitizer
 * https://www.npmjs.com/package/express-limiter
