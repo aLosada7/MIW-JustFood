@@ -1,5 +1,7 @@
 # Just Food
 
+Application to order menus using NodeJS. You have the hability to register as an user or a restaurant, ordering menus o publishing them, according to your user type.
+
 ## Entities
 
 * User - Can place orders
